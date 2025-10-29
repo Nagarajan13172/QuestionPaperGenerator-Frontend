@@ -44,4 +44,17 @@ export const questionPaperService = {
   delete: async (id: string): Promise<{ message: string }> => {
     return api.delete(`/question-paper/${id}`);
   },
+
+  /**
+   * Download question paper as PDF
+   */
+  downloadPDF: async (id: string, includeAnswers: boolean = false): Promise<Blob> => {
+    const params = new URLSearchParams();
+    params.append('include_answers', includeAnswers.toString());
+    
+    const response = await api.get(`/question-paper/${id}/pdf?${params.toString()}`, {
+      responseType: 'blob',
+    });
+    return response as unknown as Blob;
+  },
 };

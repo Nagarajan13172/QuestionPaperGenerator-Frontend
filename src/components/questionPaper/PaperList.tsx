@@ -47,6 +47,23 @@ export const PaperList: React.FC = () => {
     }
   };
 
+  const handleDownloadPDF = async (paperId: string) => {
+    try {
+      // Download PDF without answers (include_answers = false)
+      const blob = await questionPaperService.downloadPDF(paperId, false);
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `question-paper-${paperId}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to download PDF');
+    }
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -118,6 +135,12 @@ export const PaperList: React.FC = () => {
                   onClick={() => navigate(`/question-paper/${paper.id}`)}
                 >
                   👁️ View Paper
+                </button>
+                <button
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleDownloadPDF(paper.id)}
+                >
+                  📥 Download PDF
                 </button>
                 <button
                   className="btn btn-danger btn-sm"

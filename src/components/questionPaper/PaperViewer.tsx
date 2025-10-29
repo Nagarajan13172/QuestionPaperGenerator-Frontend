@@ -134,9 +134,7 @@ export const PaperViewer: React.FC = () => {
                     {question.unit_name && (
                       <div className="question-meta-info">
                         <span className="unit-badge">📚 {question.unit_name}</span>
-                        <span className="difficulty-badge">
-                          {question.difficulty === 'easy' ? '🟢' : question.difficulty === 'hard' ? '�' : '🟡'} {question.difficulty}
-                        </span>
+                  
                       </div>
                     )}
 

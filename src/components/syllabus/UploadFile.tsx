@@ -58,7 +58,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ onSuccess }) => {
       
       setTimeout(() => {
         setSuccess(false);
-        onSuccess?.(result.id);
+        onSuccess?.(Number(result.id));
       }, 2000);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to upload file');

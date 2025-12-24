@@ -29,7 +29,7 @@ export const UploadText: React.FC<UploadTextProps> = ({ onSuccess }) => {
       
       setTimeout(() => {
         setSuccess(false);
-        onSuccess?.(result.id);
+        onSuccess?.(Number(result.id));
       }, 2000);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to upload syllabus');

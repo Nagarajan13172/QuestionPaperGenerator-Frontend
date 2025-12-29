@@ -54,6 +54,8 @@ export interface Question {
   options?: string[] | null;
   correct_answer?: string;
   answer_explanation?: string;
+  course_outcome?: string; // CO1, CO2, CO3, etc.
+  blooms_level?: string; // K1, K2, K3, etc.
   // Legacy fields for compatibility
   question?: string;
   unit?: string;

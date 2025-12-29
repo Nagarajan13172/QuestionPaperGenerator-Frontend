@@ -116,50 +116,41 @@ export const PaperViewer: React.FC = () => {
           {Object.entries(groupedQuestions).map(([type, questions], sectionIndex) => (
             <div key={type} className="question-section">
               <h2 className="section-title">
-                Section {String.fromCharCode(65 + sectionIndex)}: {formatQuestionType(type)}
+                Part {String.fromCharCode(65 + sectionIndex)} – ({questions.length} × {questions[0].marks} = {questions.length * questions[0].marks} Marks)
               </h2>
-              <p className="section-info">
-                ({questions.length} question{questions.length > 1 ? 's' : ''} × {questions[0].marks} marks each = {questions.length * questions[0].marks} marks)
-              </p>
 
-              {questions.map((question, qIndex) => (
-                <div key={question.id} className="question-item">
-                  <div className="question-header">
-                    <span className="question-number">Q{qIndex + 1}.</span>
-                    <span className="question-marks">[{question.marks} marks]</span>
-                  </div>
-                  <div className="question-content">
-                    <p className="question-text">{question.question_text}</p>
-                    
-                    {question.unit_name && (
-                      <div className="question-meta-info">
-                        <span className="unit-badge">📚 {question.unit_name}</span>
-                  
-                      </div>
-                    )}
-
-                    {question.options && question.options.length > 0 && (
-                      <div className="question-options">
-                        {question.options.map((option, optIndex) => (
-                          <div key={optIndex} className="option-item">
-                            <span className="option-text">{option}</span>
+              <table className="questions-table">
+                <thead>
+                  <tr>
+                    <th className="col-qno">Q. No.</th>
+                    <th className="col-question">Questions</th>
+                    <th className="col-co">CO</th>
+                    <th className="col-bl">BL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {questions.map((question, qIndex) => (
+                    <tr key={question.id} className="question-row">
+                      <td className="question-number">{qIndex + 1}.</td>
+                      <td className="question-content">
+                        <p className="question-text">{question.question_text}</p>
+                        
+                        {question.options && question.options.length > 0 && (
+                          <div className="question-options">
+                            {question.options.map((option, optIndex) => (
+                              <div key={optIndex} className="option-item">
+                                {String.fromCharCode(97 + optIndex)}. {option}
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {type !== 'multiple_choice' && (
-                      <div className="answer-space">
-                        <div className="answer-lines">
-                          {Array.from({ length: type === 'essay' ? 15 : type === 'descriptive' ? 10 : 5 }).map((_, i) => (
-                            <div key={i} className="answer-line"></div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
+                        )}
+                      </td>
+                      <td className="course-outcome">{question.course_outcome || '-'}</td>
+                      <td className="blooms-level">{question.blooms_level || '-'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ))}
         </div>

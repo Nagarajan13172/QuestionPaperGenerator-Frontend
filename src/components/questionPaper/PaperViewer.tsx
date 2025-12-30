@@ -42,12 +42,6 @@ export const PaperViewer: React.FC = () => {
     return grouped;
   };
 
-  const formatQuestionType = (type: string) => {
-    return type
-      .split('_')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  };
 
   const handlePrint = () => {
     window.print();

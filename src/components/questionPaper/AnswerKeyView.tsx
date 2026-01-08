@@ -95,12 +95,12 @@ export const AnswerKeyView: React.FC<AnswerKeyViewProps> = ({ paperId, isOpen, o
                                             <span className="answer-label">Correct Answer:</span>
                                             <div className="answer-content">{item.correct_answer}</div>
 
-                                            {item.explanation && (
+                                            {/* {item.explanation && (
                                                 <div className="explanation-box">
                                                     <span className="explanation-label">Explanation:</span>
                                                     <span className="explanation-content">{item.explanation}</span>
                                                 </div>
-                                            )}
+                                            )} */}
                                         </div>
                                     </div>
                                 ))}

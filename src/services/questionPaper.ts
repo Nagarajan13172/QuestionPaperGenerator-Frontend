@@ -51,10 +51,16 @@ export const questionPaperService = {
   downloadPDF: async (id: string, includeAnswers: boolean = false): Promise<Blob> => {
     const params = new URLSearchParams();
     params.append('include_answers', includeAnswers.toString());
-    
+
     const response = await api.get(`/question-paper/${id}/pdf?${params.toString()}`, {
       responseType: 'blob',
     });
     return response as unknown as Blob;
+  },
+  /**
+   * Get answer key for a question paper
+   */
+  getAnswerKey: async (id: string): Promise<import('../types').AnswerKey> => {
+    return api.get(`/question-paper/${id}/answer-key`);
   },
 };

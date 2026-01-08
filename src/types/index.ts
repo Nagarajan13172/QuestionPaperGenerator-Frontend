@@ -115,3 +115,29 @@ export interface HealthResponse {
   status: string;
   message: string;
 }
+
+export type AnswerKeyQuestionType =
+  | "multiple_choice"
+  | "short_answer"
+  | "descriptive"
+  | "essay"
+  | "true_false"
+  | "fill_blank";
+
+export interface AnswerKeyItem {
+  question_id: string;
+  question_number: number;
+  question_text: string;
+  type: AnswerKeyQuestionType;
+  marks: number;
+  correct_answer: string;
+  explanation?: string; // Optional explanation/marking scheme
+}
+
+export interface AnswerKey {
+  paper_id: string;
+  course_name: string;
+  total_marks: number;
+  generated_at: string; // ISO date string
+  answers: AnswerKeyItem[];
+}
